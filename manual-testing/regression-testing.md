@@ -1,57 +1,66 @@
-# TicketGo — Regression Testing Plan
+# TicketGo — Regression Testing
 
-**Project:** TicketGo (Fictional Booking System)  
+**Project:** TicketGo (Fictional Ticket Booking System)  
 **Module:** Booking / Pricing / Discounts  
-**Status:** Planned — Not Executed
+**Test Type:** Retesting and Regression Testing  
+**Execution Status:** Not Run
 
-## Change Under Test
+## 1. Objective
 
-A hypothetical defect in discount calculation has been fixed.
+Verify that a hypothetical discount calculation defect has been fixed and that related pricing functionality continues to work correctly.
 
-Previously, a valid 20% discount did not reduce the booking price.
+## 2. Change Under Test
 
-## Retesting
+**Related Bug:** BUG-002
+
+**Description:** Applying a valid 20% discount to a booking worth 1,000 units previously did not update the final price.
+
+**Expected Fix:** A valid 20% discount reduces the total from 1,000 to 800 units.
+
+**Fix Status:** Hypothetically fixed for this training exercise.
+
+## 3. Retesting
 
 | ID | Scenario | Expected Result | Status |
 |---|---|---|---|
-| RT-001 | Apply valid 20% discount to a booking worth 1000 units | Final price is 800 units | Not Run |
+| RT-001 | Apply valid 20% discount to a booking worth 1,000 units | Final total is 800 units | Not Run |
 
-## Regression Test Suite
+## 4. Regression Test Suite
 
 | ID | Scenario | Expected Result | Status |
 |---|---|---|---|
-| RG-001 | Calculate price for one ticket without discount | Correct base price displayed | Not Run |
-| RG-002 | Calculate total for three tickets | Correct sum displayed | Not Run |
-| RG-003 | Apply expired discount code | Discount rejected | Not Run |
-| RG-004 | Increase ticket count after applying discount | Final price recalculated correctly | Not Run |
-| RG-005 | Remove an applied discount code | Original price restored | Not Run |
+| RG-001 | Book one ticket without discount | Correct base price displayed | Not Run |
+| RG-002 | Book three tickets without discount | Correct total price calculated | Not Run |
+| RG-003 | Apply an expired discount code | Discount is rejected | Not Run |
+| RG-004 | Change ticket quantity after applying a valid discount | Total price is recalculated correctly | Not Run |
+| RG-005 | Remove an applied discount code | Original price is restored | Not Run |
 
-## Test Execution Report
+## 5. Test Execution Report
 
-**Execution Date:** Not Scheduled  
 **Environment:** Not Available  
 **Build Version:** Not Available  
-**Execution Status:** Not Started
+**Execution Date:** Not Scheduled
 
-| Metric | Value |
+| Metric | Count |
 |---|---:|
-| Total Planned Tests | 6 |
+| Total Tests | 6 |
 | Passed | 0 |
 | Failed | 0 |
 | Blocked | 0 |
 | Not Run | 6 |
+| Execution Rate | 0% |
 
-## Risks
+## 6. Risks
 
-- Incorrect final amount after discounts
-- Discounts incorrectly applied to multiple tickets
-- Expired discount codes accepted
-- Pricing not recalculated after quantity changes
+- Incorrect discount calculations
+- Incorrect total after changing ticket quantity
+- Expired discount codes being accepted
+- Original price not restored after removing discount
 
-## Notes
+## 7. Conclusion
 
-This document contains a hypothetical change, planned retesting, and regression scenarios.
+All test scenarios have been designed but not executed.
 
-No tests have been executed against a live TicketGo application.
+The defect fix has not been verified against a real application.
 
-The execution report is a pre-execution baseline, not evidence of a completed test run.
+This document is a training artifact based on fictional TicketGo requirements.
