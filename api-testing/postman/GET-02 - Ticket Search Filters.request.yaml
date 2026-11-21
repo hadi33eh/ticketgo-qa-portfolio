@@ -1,0 +1,45 @@
+$kind: http-request
+description: ""
+url: https://postman-echo.com/get?destination=Tehran&passengers=4&class=economy
+method: GET
+queryParams:
+  destination: Tehran
+  passengers: "4"
+  class: economy
+scripts:
+  - type: afterResponse
+    code: "const response = pm.response.json();\r
+
+      \r
+
+      pm.test(\"Status code is 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Destination is Tehran\", function () {\r
+
+      \    pm.expect(response.args.destination).to.eql(\"Tehran\");\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Passengers is 4\", function () {\r
+
+      \    pm.expect(response.args.passengers).to.eql(\"4\");\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Class is economy\", function () {\r
+
+      \    pm.expect(response.args.class).to.eql(\"economy\");\r
+
+      });"
+    language: text/javascript
+order: 1000

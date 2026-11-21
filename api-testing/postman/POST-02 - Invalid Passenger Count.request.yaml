@@ -1,0 +1,58 @@
+$kind: http-request
+description: ""
+url: https://postman-echo.com/post
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"destination\": \"Shiraz\",\r
+
+    \  \"passengers\": -2,\r
+
+    \  \"ticketPrice\": 1000,\r
+
+    \  \"totalPrice\": -2000,\r
+
+    \  \"status\": \"Pending\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "const response = pm.response.json();\r
+
+      const booking = response.json;\r
+
+      \r
+
+      pm.test(\"HTTP Status is 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Invalid passenger count is echoed\", function () {\r
+
+      \    pm.expect(booking.passengers).to.eql(-2);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Passenger count violates TicketGo rules\", function () {\r
+
+      \    pm.expect(booking.passengers < 1).to.be.true;\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Total price is negative\", function () {\r
+
+      \    pm.expect(booking.totalPrice).to.be.below(0);\r
+
+      });"
+    language: text/javascript
+order: 3000

@@ -1,0 +1,35 @@
+$kind: http-request
+description: ""
+url: https://postman-echo.com/get?destination=Shiraz&passengers=2
+method: GET
+queryParams:
+  destination: Shiraz
+  passengers: "2"
+scripts:
+  - type: afterResponse
+    code: "const response = pm.response.json();\r
+
+      \r
+
+      pm.test(\"Status code is 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Destination is Shiraz\", function () {\r
+
+      \    pm.expect(response.args.destination).to.eql(\"Shiraz\");\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Passengers is 2\", function () {\r
+
+      \    pm.expect(response.args.passengers).to.eql(\"2\");\r
+
+      });"
+    language: text/javascript

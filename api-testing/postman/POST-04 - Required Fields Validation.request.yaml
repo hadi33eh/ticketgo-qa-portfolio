@@ -1,0 +1,88 @@
+$kind: http-request
+description: ""
+url: https://postman-echo.com/post
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"bookingId\": 205,\r
+
+    \  \"passengerName\": \"Sara\",\r
+
+    \  \"passengers\": 1,\r
+
+    \  \"totalPrice\": 1200,\r
+
+    \  \"status\": \"Confirmed\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "const response = pm.response.json();\r
+
+      const booking = response.json;\r
+
+      \r
+
+      pm.test(\"Status code is 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Required fields exist\", function () {\r
+
+      \    pm.expect(booking).to.have.all.keys(\r
+
+      \        \"bookingId\",\r
+
+      \        \"passengerName\",\r
+
+      \        \"passengers\",\r
+
+      \        \"totalPrice\",\r
+
+      \        \"status\"\r
+
+      \    );\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Booking ID is a number\", function () {\r
+
+      \    pm.expect(booking.bookingId).to.be.a(\"number\");\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Passenger name is not empty\", function () {\r
+
+      \    pm.expect(booking.passengerName).to.be.a(\"string\");\r
+
+      \    pm.expect(booking.passengerName.trim()).to.not.be.empty;\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Passenger count is valid\", function () {\r
+
+      \    pm.expect(booking.passengers).to.be.within(1, 5);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Booking status is Confirmed\", function () {\r
+
+      \    pm.expect(booking.status).to.eql(\"Confirmed\");\r
+
+      });"
+    language: text/javascript
+order: 5000

@@ -1,0 +1,96 @@
+$kind: http-request
+description: ""
+url: https://postman-echo.com/post
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"bookingId\": 101,\r
+
+    \  \"passenger\": {\r
+
+    \    \"name\": \"Ali\",\r
+
+    \    \"age\": 25\r
+
+    \  },\r
+
+    \  \"tickets\": [\r
+
+    \    {\r
+
+    \      \"id\": 1,\r
+
+    \      \"price\": 1000\r
+
+    \    },\r
+
+    \    {\r
+
+    \      \"id\": 2,\r
+
+    \      \"price\": 1500\r
+
+    \    }\r
+
+    \  ],\r
+
+    \  \"status\": \"Pending\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "const response = pm.response.json();\r
+
+      const booking = response.json;\r
+
+      \r
+
+      pm.test(\"Status code is 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Booking ID exists\", function () {\r
+
+      \    pm.expect(booking).to.have.property(\"bookingId\");\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Passenger name is Ali\", function () {\r
+
+      \    pm.expect(booking.passenger.name).to.eql(\"Ali\");\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Tickets is an array\", function () {\r
+
+      \    pm.expect(booking.tickets).to.be.an(\"array\");\r
+
+      });\r
+
+      \r
+
+      pm.test(\"There are two tickets\", function () {\r
+
+      \    pm.expect(booking.tickets.length).to.eql(2);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Second ticket price is 1500\", function () {\r
+
+      \    pm.expect(booking.tickets[1].price).to.eql(1500);\r
+
+      });"
+    language: text/javascript
+order: 4000

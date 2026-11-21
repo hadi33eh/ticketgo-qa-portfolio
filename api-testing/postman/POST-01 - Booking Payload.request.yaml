@@ -1,0 +1,70 @@
+$kind: http-request
+description: ""
+url: https://postman-echo.com/post
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"destination\": \"Shiraz\",\r
+
+    \  \"passengers\": 2,\r
+
+    \  \"ticketPrice\": 1000,\r
+
+    \  \"totalPrice\": 2000,\r
+
+    \  \"status\": \"Pending\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "const response = pm.response.json();\r
+
+      const booking = response.json;\r
+
+      \r
+
+      pm.test(\"Status code is 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Destination is Shiraz\", function () {\r
+
+      \    pm.expect(booking.destination).to.eql(\"Shiraz\");\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Passengers is a number\", function () {\r
+
+      \    pm.expect(booking.passengers).to.be.a(\"number\");\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Total price matches quantity times price\", function () {\r
+
+      \    pm.expect(booking.totalPrice).to.eql(\r
+
+      \        booking.passengers * booking.ticketPrice\r
+
+      \    );\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Status is Pending\", function () {\r
+
+      \    pm.expect(booking.status).to.eql(\"Pending\");\r
+
+      });"
+    language: text/javascript
+order: 2000
